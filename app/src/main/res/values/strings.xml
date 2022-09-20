@@ -11,4 +11,8 @@
     <string name="button_name">Click me</string>
     <string name="button_loading">We are loading </string>
     <string name="title_activity_detail">DetailActivity</string>
+
+    <string name="glideString">Glide is an image Loading Library</string>
+    <string name="udacityString">LoadApp, it is a repository by Udacity</string>
+    <string name="retrofitString">Retrofit is a type-safe HTTP client for Android</string>
 </resources>

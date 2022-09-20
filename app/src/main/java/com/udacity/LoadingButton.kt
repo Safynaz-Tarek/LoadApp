@@ -16,12 +16,42 @@ class LoadingButton @JvmOverloads constructor(
     private val valueAnimator = ValueAnimator()
 
     private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
+        when(new) {
+            ButtonState.Loading -> {
+//                buttonText = context.getString(R.string.button_status_loading)
+//                startAnimator()
+            }
 
+            ButtonState.Completed -> {
+//                buttonText = context.getString(R.string.button_status_download_complete)
+//                backgroundClr = context.getColor(R.color.colorPrimary)
+//                arcReset()
+            }
+
+            ButtonState.Clicked -> {
+//                custom_button.isEnabled = false
+            }
+
+//            ButtonState.Idle -> {
+//                buttonText = context.getString(R.string.button_status_idle)
+//            }
+
+//            ButtonState.Download -> {
+//                buttonText = context.getString(R.string.button_status_download)
+//                custom_button.isEnabled = true
+//            }
+//
+//            ButtonState.Test -> {
+//                buttonText = context.getString(R.string.button_status_test)
+//                startAnimator()
+//            }
+        }
+        invalidate()
     }
 
 
     init {
-
+        isClickable = true
     }
 
 

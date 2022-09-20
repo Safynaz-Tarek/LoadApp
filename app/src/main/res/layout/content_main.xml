@@ -9,7 +9,44 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <com.udacity.LoadingButton
+    <RadioGroup
+        android:id="@+id/radios"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/custom_button"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/glide_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="radio_choice"
+            android:text="@string/glideString"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/udacity_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="radio_choice"
+            android:text="@string/udacityString"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/retrofit_choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:onClick="radio_choice"
+            android:text="@string/retrofitString"
+            android:textSize="20sp" />
+    </RadioGroup>
+<!--    com.udacity.LoadingButton-->
+    <Button
         android:id="@+id/custom_button"
         android:layout_width="0dp"
         app:layout_constraintStart_toStartOf="parent"

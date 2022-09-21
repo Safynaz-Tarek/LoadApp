@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var URL_CHOICE : DownloadType
     private val NOTIFICATION_ID = 1
+    private var current_status: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,6 @@ class MainActivity : AppCompatActivity() {
             download()
         }
 
-
     }
 
     private val receiver = object : BroadcastReceiver() {
@@ -57,18 +57,22 @@ class MainActivity : AppCompatActivity() {
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, 0L)
             val action = intent?.action
 
+
             if (downloadID == id) {
                 if (action.equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
-                    when(URL_CHOICE){
-                        DownloadType.UDACITY -> showNotification(getString(R.string.udacityString),"Success")
-                        DownloadType.GLIDE -> showNotification(getString(R.string.glideString),"Success")
-                        DownloadType.RETROFIT -> showNotification(getString(R.string.retrofitString),"Success")
-                    }
+                    current_status = "Success"
+                    custom_button.buttonState = ButtonState.Completed
 
+                }else{
+                    custom_button.buttonState = ButtonState.Completed
+                    current_status = "Failed"
                 }
             }
-
-
+            when(URL_CHOICE){
+                DownloadType.UDACITY -> showNotification(getString(R.string.udacityString),current_status)
+                DownloadType.GLIDE -> showNotification(getString(R.string.glideString),current_status)
+                DownloadType.RETROFIT -> showNotification(getString(R.string.retrofitString),current_status)
+            }
         }
     }
 
@@ -88,6 +92,7 @@ class MainActivity : AppCompatActivity() {
         if(!::URL_CHOICE.isInitialized){
             Toast.makeText(applicationContext, "Please select one of the above options", Toast.LENGTH_LONG).show()
         }else{
+
             val request =
                 DownloadManager.Request(Uri.parse(URL_CHOICE.url))
                     .setTitle(getString(R.string.app_name))
@@ -99,6 +104,8 @@ class MainActivity : AppCompatActivity() {
             val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
             downloadID =
                 downloadManager.enqueue(request)// enqueue puts the download request in the queue.
+
+            custom_button.buttonState = ButtonState.Loading
         }
     }
 
@@ -115,7 +122,6 @@ class MainActivity : AppCompatActivity() {
 
         action = NotificationCompat.Action(0,"Check status" ,pendingIntent)
 
-
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .apply {
                 addAction(action)
@@ -128,8 +134,8 @@ class MainActivity : AppCompatActivity() {
             }.build()
 
         notificationManager.notify(NOTIFICATION_ID,notification)
-
     }
+
     private fun createChannel(channelId: String, channelName: String) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             val notificationChannel = NotificationChannel(
@@ -153,7 +159,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 
     enum class DownloadType(val url: String) {
         UDACITY(

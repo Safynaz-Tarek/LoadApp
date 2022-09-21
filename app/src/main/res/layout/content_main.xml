@@ -45,8 +45,8 @@
             android:text="@string/retrofitString"
             android:textSize="20sp" />
     </RadioGroup>
-<!--    com.udacity.LoadingButton-->
-    <Button
+<!--    -->
+    <com.udacity.LoadingButton
         android:id="@+id/custom_button"
         android:layout_width="0dp"
         app:layout_constraintStart_toStartOf="parent"

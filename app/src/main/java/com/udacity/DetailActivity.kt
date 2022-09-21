@@ -10,10 +10,17 @@ import kotlinx.android.synthetic.main.content_detail.*
 
 class DetailActivity : AppCompatActivity() {
 
+    private lateinit var notificationManager: NotificationManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
+
+        notificationManager = getSystemService(
+            NotificationManager::class.java
+        )
+
+        notificationManager.cancelAll()
 
         status_value.text = intent.getStringExtra("Status")
         file_name_value.text  = intent.getStringExtra("FileName")

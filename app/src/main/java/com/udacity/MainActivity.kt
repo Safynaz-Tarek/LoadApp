@@ -134,6 +134,8 @@ class MainActivity : AppCompatActivity() {
             }.build()
 
         notificationManager.notify(NOTIFICATION_ID,notification)
+
+
     }
 
     private fun createChannel(channelId: String, channelName: String) {

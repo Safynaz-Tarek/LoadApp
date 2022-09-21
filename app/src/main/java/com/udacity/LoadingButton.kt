@@ -6,7 +6,6 @@ import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.withStyledAttributes
 import kotlin.properties.Delegates
 
@@ -31,6 +30,8 @@ class LoadingButton @JvmOverloads constructor(
         typeface = Typeface.create( "", Typeface.BOLD)
         textSize = 40F
     }
+
+    private val rectF = RectF(40F, 40F, 80F, 80F)
 
 
     var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
@@ -106,9 +107,6 @@ class LoadingButton @JvmOverloads constructor(
             buttonProgres.toFloat(),
             heightSize.toFloat(),
             paint)
-
-        val rectF = RectF()
-        rectF.set(40F, 40F, 80F, 80F)
 
         paint.color = circleProgressColor
         canvas?.drawArc(
